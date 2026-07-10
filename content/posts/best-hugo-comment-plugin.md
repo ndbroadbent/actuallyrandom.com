@@ -2,7 +2,7 @@
 title: "Best Hugo Comment Plugin"
 date: 2026-07-10T18:20:00+12:00
 draft: false
-description: "I compared Cusdis, giscus, FastComments, Remark42 and other Hugo comment systems, then chose Cusdis for a small new blog."
+description: "I compared Cusdis, giscus, FastComments, Remark42 and other Hugo comment systems, installed Cusdis, found two bugs that silently lose comments, and took it back off again."
 slug: "best-hugo-comment-plugin"
 tags:
   - Hugo
@@ -29,9 +29,13 @@ I already had some experience with the most obvious answer. I used Disqus on [ma
 
 After going through the current options, my answer is:
 
-**Cusdis is the best free starting point for a small general blog. Giscus is the best free option for a technical audience. FastComments is the stronger managed product if you are willing to pay, and Remark42 is the best option if you want to host everything yourself.**
+**FastComments is the one I would actually pay a dollar a month for. Giscus is the best free option for a technical audience. Remark42 is the best option if you want to host everything yourself. Do not use Cusdis right now, and if none of those appeal, running no comments at all is a perfectly respectable choice.**
 
-I chose Cusdis for Actually Random. Someone arriving from Google to read about bats or Adrien Brody should not need a GitHub account to leave a comment. Cusdis is completely free for the first 100 approved comments each month, and I am definitely not expecting that many comments here.
+That is not where I started. I chose Cusdis first, on paper it was the obvious answer for this blog, and I installed it on Actually Random. Someone arriving from Google to read about bats or Adrien Brody should not need a GitHub account to leave a comment, and Cusdis is free for the first 100 approved comments each month.
+
+Then I found two bugs. The widget does not size or theme itself correctly, which is annoying but fixable with about 40 lines of my own JavaScript. The second one is not fixable from my side: comments are hidden until approved, and the email that is supposed to tell you a comment is waiting never arrives. A moderation queue you cannot see is a shredder.
+
+So I removed the comment box from this site. Both bugs are documented below, with the code, because I would rather this article save you the afternoon it cost me.
 
 ## Why there is no actual Hugo comment plugin
 
@@ -58,7 +62,7 @@ Those are still the two questions that decide the answer:
 
 | System | Hosting | Reader account | Price | Best for |
 | --- | --- | --- | --- | --- |
-| [Cusdis](https://cusdis.com/) | Hosted or self-hosted | No login required | Free for 100 approved comments/month | Small new blogs |
+| [Cusdis](https://cusdis.com/) | Hosted or self-hosted | No login required | Free for 100 approved comments/month | Nothing, until two bugs below are fixed |
 | [FastComments](https://fastcomments.com/) | Hosted | Optional, anonymous supported | Usage based, often US$0.99/month | General blogs |
 | [giscus](https://giscus.app/) | GitHub Discussions | GitHub required | Free | Developer blogs and open-source projects |
 | [Remark42](https://remark42.com/) | Self-hosted | Email, social or anonymous | Software is free | Owning the complete system |
@@ -69,7 +73,7 @@ Those are still the two questions that decide the answer:
 
 Prices and product details change, so check the linked pages before choosing. The figures above were current in July 2026.
 
-## Best free starting point for a small blog: Cusdis
+## The one I would have recommended: Cusdis, and why I cannot
 
 [Cusdis](https://cusdis.com/) is a lightweight comment system that can be used as a hosted service or installed on your own server. Readers do not need an account, and Cusdis advertises its embedded widget at around 5KB gzipped. The loader script you actually put on the page is smaller than that: I measured `cusdis.es.js` at 3,334 bytes raw and 1,188 bytes over the wire with gzip, and it pulls the rest in afterwards.
 
@@ -101,13 +105,19 @@ if (project.owner.enableNewCommentNotification) {
 
 If both fields are empty there is no recipient, and the failure is swallowed by an empty `catch`. Nothing is logged, nothing is retried, and nothing tells you.
 
-The fix takes a minute. Go to `User` then `Settings` in the Cusdis dashboard, fill in **Email (for notification)**, and make sure **Enable notification** is switched on. The documentation mentions where to change the notification address, but not that it may be blank to begin with.
+Cusdis does request the `read:user,user:email` scope from GitHub, so I assume the address goes missing when your GitHub email is set to private, as mine is.
 
-Cusdis does request the `read:user,user:email` scope from GitHub, so I assume the address goes missing when your GitHub email is set to private, as mine is. Either way, check it. A moderated comment system that cannot tell you a comment is waiting is just a system that quietly deletes your comments.
+The apparent fix takes a minute. Go to `User` then `Settings` in the Cusdis dashboard, fill in **Email (for notification)**, and make sure **Enable notification** is switched on. The documentation mentions where to change the notification address, but not that it may be blank to begin with.
+
+I did that. No notification email has ever arrived. I cannot see the hosted service's logs, so I do not know whether the address is not being saved, the send is failing, or the mail is being dropped somewhere before my inbox. What I do know is that the empty `catch` above means a failure at that last step produces no error anywhere I can reach.
+
+That is the bug that ended it for me. A moderated comment system that cannot tell you a comment is waiting is not a moderated comment system. It is a system that quietly discards your readers' comments, and does it silently enough that you would never think to check.
 
 There are a couple of reasons to remain cautious. The project's GitHub README carries the line "Contact me if you want to buy/acquire this project", and the newest tagged release there is v1.3.0 from November 2021. The repository has not been abandoned, with commits as recently as late 2025, but nearly five years without a release is a signal. A 2023 Hugo forum discussion also raised concerns about exporting comments. The hosted service is still operating and advertises version 1.4.0, so the cloud product has clearly moved on from the last tag. I would confirm the export process before building a valuable archive there.
 
-For Actually Random, that risk feels proportionate. The blog is new, the expected comment volume is tiny, and changing providers later would be manageable. Cusdis gets comments online now without adding another bill or another server.
+When I started, that risk felt proportionate. The blog is new, the expected comment volume is tiny, and changing providers later would be easy. Cusdis got comments online without adding another bill or another server, and I was happy with it for about an hour.
+
+If Cusdis fixes the iframe sizing and the notification email, I would use it again tomorrow. The idea is right and the widget is tiny. Until then, the free tier is free in the way that a car with no brakes is cheap.
 
 ## Best paid hosted option: FastComments
 
@@ -121,7 +131,7 @@ FastComments also says its comment threads can be indexed by search engines. I w
 
 The main downside is dependence on a commercial provider. It advertises API access and audit logs, though I did not find an explicit one-click export on the pricing page, so I would confirm that before committing an archive to it. It also has far more community features than a tiny new blog needs. I can ignore most of them.
 
-If the Cusdis moderation workflow becomes annoying or the service becomes unreliable, FastComments is the hosted upgrade I would consider first. It removes the GitHub barrier without requiring me to run a server.
+Having watched Cusdis silently swallow its own notifications, this is the one I would reach for next. It removes the GitHub barrier without requiring me to run a server, and a paid product has an obvious incentive to make sure the email that says "you have a comment" actually gets sent.
 
 ## Best free option: giscus
 
@@ -181,7 +191,7 @@ Giscus has its own GitHub-login limitation, but it is free, clean and stores the
 
 My experience with the ads is the main reason I would not recommend Disqus for a new Hugo site. Built-in support saves a few minutes once; the consequences of the provider choice last for years.
 
-## Adding Cusdis to PaperMod
+## Adding any comment system to PaperMod
 
 PaperMod makes provider choice simple. It ships an empty `comments.html` partial for you to override, and calls it from `single.html` behind a single condition:
 
@@ -230,7 +240,7 @@ comments: false
 
 The widget renders near the bottom of each article and does not appear on the home page, the archive or any other list page, because `single.html` is the only template that calls the partial. The Cusdis script is loaded with `async defer`, so the article does not wait for the comment service before rendering.
 
-This site is running exactly that, as of this post. If you can see a comment box below, it worked.
+This site ran exactly that for a few hours. There is no comment box below this article any more, because I took it out again for the reason described above. The instructions are still correct, and the same partial works for any provider: swap the Cusdis embed for a FastComments or giscus one and nothing else changes.
 
 ## The widget arrives broken, and you have to fix it yourself
 
@@ -326,7 +336,7 @@ Reading `dataset.theme` rather than only the media query matters on PaperMod, be
 
 After deploying, the same headless check reports `height: 380px`, and the iframe's inner document carries an explicit `color-scheme: dark`. The letterbox is gone.
 
-I do not love that a comment widget needs 40 lines of my own JavaScript to display at the correct size. It is a fair illustration of the earlier caution about Cusdis: the hosted service works, but the code around it has not had a release since 2021.
+I do not love that a comment widget needs 40 lines of my own JavaScript to display at the correct size. On its own I would have shrugged and moved on, because the fix works and I had already written it. It is the second bug, the one where nobody tells you a comment is waiting, that made me delete the widget rather than patch around it. Together they are a fair illustration of the earlier caution: the hosted service is up, but the code around it has not had a release since 2021, and it shows.
 
 ## My answer
 
@@ -334,12 +344,15 @@ The phrase "best Hugo comment plugin" suggests there should be a package to inst
 
 My current choices are straightforward:
 
-- Use Cusdis for a small general blog that wants to start free.
-- Use FastComments when a managed service and automatic spam filtering are worth paying for.
+- Use FastComments when you want a managed service that works, and a dollar a month is not the obstacle.
 - Use giscus when the audience already uses GitHub.
 - Use Remark42 when owning and operating the backend is part of the plan.
+- Avoid Cusdis until the iframe sizing and the notification email are fixed.
+- Run no comments at all if none of that appeals.
 
-I chose Cusdis for Actually Random. Its free allowance is far above the comment volume I expect, it does not turn GitHub membership into an admission requirement, and it saves me from maintaining another service. The trade is manual approval and some uncertainty about the project's future. At this size, changing my mind later would be easy. If the blog somehow develops a large and unruly community of people arguing about bats, I can revisit the decision with much better information.
+That last option deserves more respect than it usually gets. Comments are not free even when the software is. Somebody has to read them, approve them, and decide what to do about the person who is angry about bats. The cost is attention, and a new blog with no readers has nothing to moderate anyway.
+
+So Actually Random has no comments today. When I want them, I will pay FastComments a dollar a month, because the thing I actually need from a comment system is not a widget. It is confidence that a stranger's words reached me. Cusdis gave me a widget and lost the words.
 
 ## Sources
 
