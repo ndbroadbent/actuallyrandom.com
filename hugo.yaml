@@ -14,8 +14,10 @@ pagination:
 minify:
   disableXML: true
 
-# Google Analytics (GA4). PaperMod only injects this on production builds
-# (i.e. not in `hugo server`), so local dev won't pollute your stats.
+# Google Analytics (GA4). PaperMod gates the tag on hugo.IsProduction, which is
+# false under `hugo server`, so local previews stay out of the stats. Do not set
+# params.env to "production" here: it short-circuits that check and the tag then
+# fires in development too.
 services:
   googleAnalytics:
     ID: G-X4VCLVLRKS
@@ -42,9 +44,8 @@ menu:
       weight: 30
 
 params:
-  env: production
   description: >-
-    An outlet for actually random ideas — experiments, rabbit holes,
+    An outlet for actually random ideas: experiments, rabbit holes,
     and things that seemed like a good idea at 2am.
   author: Nathan Broadbent
   defaultTheme: auto
@@ -59,7 +60,7 @@ params:
   homeInfoParams:
     Title: Actually Random 🎲
     Content: >-
-      An outlet for actually random ideas — experiments, rabbit holes,
+      An outlet for actually random ideas: experiments, rabbit holes,
       and things that seemed like a good idea at 2am.
 
   socialIcons:
