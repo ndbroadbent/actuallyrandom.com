@@ -1,5 +1,5 @@
 ---
-title: "Why can't humans photosynthesize? Not for the reason you were told"
+title: "Why can't humans photosynthesize?"
 date: 2026-07-10T20:35:00+12:00
 draft: false
 description: "Everyone says we lack chloroplasts. That is the least important reason. A human is a 97 watt appliance wrapped in the wrong shape, and no amount of chlorophyll fixes geometry."
