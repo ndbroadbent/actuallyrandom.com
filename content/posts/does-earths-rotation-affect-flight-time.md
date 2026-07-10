@@ -1,5 +1,5 @@
 ---
-title: "Does the Earth's rotation affect flight time? No, but it builds the wind that does"
+title: "Does the Earth's rotation affect flight time?"
 date: 2026-07-10T20:20:00+12:00
 draft: false
 description: "Flying east is faster, but not because the planet turns underneath you. The rotation does move bullets, change what an aircraft weighs, and it once cost a freight train 42 femtoseconds."
