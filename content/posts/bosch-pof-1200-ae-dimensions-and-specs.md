@@ -24,7 +24,7 @@ I wanted to 3D print an adapter so my Bosch POF 1200 AE router would run along a
 
 I assumed this would take about four minutes. Bosch sells the router, Bosch sells a guide rail adapter for it, so Bosch must publish the plate dimensions somewhere.
 
-Bosch does not. As far as I can tell, nobody does. And the numbers floating around the internet do not agree with each other, which I discovered in a slightly humiliating way that I will get to.
+Bosch does not. As far as I can tell, nobody does. And the numbers floating around the internet do not agree with each other.
 
 ## The specifications that are actually published
 
@@ -67,8 +67,6 @@ It gives no dimension for either. There is no drawing of the plate, no bolt circ
 Bosch sells you a plate, sells you an adapter that bolts to the plate, and tells you nothing about the plate.
 
 ## Three numbers that cannot all be true
-
-Here is the humiliating part.
 
 I asked ChatGPT for the base plate dimensions. Twice, on the same day, a few hours apart, in two separate conversations. I got two confident answers, each laid out in a tidy table with citations.
 
@@ -124,11 +122,7 @@ Lay the sled flat so the layer lines run along the direction of travel. The tabs
 
 The published specs are the ones in the table above, and they are reliable because Bosch printed them. The plunge depth is 55 mm, the collet is 6 mm or 8 mm or 1/4 inch depending on which one is fitted, and the shank needs 20 mm of engagement.
 
-The base plate hole pattern is not published by Bosch, is not reliably documented anywhere else, and is reported inconsistently by every secondary source I found, including a language model that managed to contradict itself twice in one answer.
-
-I have written before about [a fact that dissolved completely when I looked for a source]({{< ref "are-bats-good-at-echolocation-or-do-they-just-heal-fast.md" >}}), and about [one that survived but came back smaller]({{< ref "can-pistachios-spontaneously-combust-during-shipping.md" >}}). This is a third kind. The fact was never published in the first place. What filled the vacuum was a set of numbers that look exactly like a fact, arranged in a table, with citations that go nowhere.
-
-The calipers are in the drawer. Go and get them.
+The base plate hole pattern is not published by Bosch, is not reliably documented anywhere else, and is reported inconsistently by every secondary source I found, including a language model that managed to contradict itself twice in one answer. The calipers are in the drawer. Go and get them.
 
 ## Sources
 
