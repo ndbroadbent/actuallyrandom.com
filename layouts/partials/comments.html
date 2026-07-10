@@ -1,0 +1,12 @@
+{{- /* Cusdis comments. Enabled site-wide via params.comments; disable per post
+       with `comments: false` in front matter. data-page-id uses RelPermalink so
+       a thread survives a change of domain. */ -}}
+<div id="cusdis_thread"
+  data-host="https://cusdis.com"
+  data-app-id="8c6c889b-7a04-4403-9e57-9fb622796905"
+  data-page-id="{{ .RelPermalink }}"
+  data-page-url="{{ .Permalink }}"
+  data-page-title="{{ .Title }}"
+  data-theme="auto">
+</div>
+<script async defer src="https://cusdis.com/js/cusdis.es.js"></script>

@@ -121,7 +121,7 @@ For `bacteria vs human cells in body ratio`, page one is ScienceDirect, PubMed C
 
 Which is a shame, because it is the best story of the three. The famous claim that bacterial cells outnumber human cells ten to one is wrong. [Sender, Fuchs and Milo revisited it in 2016](https://doi.org/10.1016/j.cell.2016.01.013) and put the ratio closer to 1.3 to 1, and their [revised estimates paper](https://doi.org/10.1371/journal.pbio.1002533) traces the original figure back to a casual estimate from the 1970s that got repeated for forty years without anyone rechecking it.
 
-I would enjoy writing that post enormously. It would bring me no traffic at all.
+I would enjoy writing that post enormously. It would bring me no traffic at all. (But I might still write it anyway.)
 
 ## The uncomfortable finding
 

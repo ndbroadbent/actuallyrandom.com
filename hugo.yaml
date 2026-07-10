@@ -44,6 +44,7 @@ menu:
       weight: 30
 
 params:
+  comments: true
   description: >-
     An outlet for actually random ideas: experiments, rabbit holes,
     and things that seemed like a good idea at 2am.
