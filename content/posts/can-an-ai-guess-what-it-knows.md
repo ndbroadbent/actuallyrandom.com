@@ -19,7 +19,7 @@ keywords:
   - brier score language model
 ---
 
-Last New Year's Eve I asked ChatGPT a question that has been rattling around my head ever since:
+Last New Year's Eve I asked ChatGPT a question that has been rattling around my head:
 
 > based purely on your training data, if you had to guess (without looking anything up), is "Wentworth Valley Campground" notable enough to have a wikipedia page?
 
