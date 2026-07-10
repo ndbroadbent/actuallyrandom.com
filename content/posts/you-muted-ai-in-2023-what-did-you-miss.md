@@ -1,9 +1,9 @@
 ---
-title: "I Muted AI in 2023. What Did I Miss?"
+title: "You Muted AI in 2023. What Did You Miss?"
 date: 2026-07-10T19:40:00+12:00
 draft: false
 description: "A practical catch-up guide for anyone who muted AI in early 2023 and has just returned to a world of reasoning models, coding agents, AI search and synthetic video."
-slug: "i-muted-ai-in-2023-what-did-i-miss"
+slug: "you-muted-ai-in-2023-what-did-you-miss"
 tags:
   - AI
   - ChatGPT
@@ -21,17 +21,15 @@ keywords:
   - what did I miss in AI
 ---
 
-On 10 July 2026, [Kent C. Dodds posted a thought on X](https://x.com/kentcdodds/status/2075412225536504259):
+Earlier today, [Kent C. Dodds posted a thought on X](https://x.com/kentcdodds/status/2075412225536504259):
 
-> Imagine being someone who muted "AI" early on and forgot to unmute it.
+> Imagine being someone who muted "AI" early on when some people thought it was an annoying "topic of the week" that would pass, but they forgot to unmute it. They must live in a completely different world 😅
 
-The replies tried to imagine this person. Perhaps they had briefly become a normie. Perhaps they were living in enviable peace. Perhaps they were about to have an extremely confusing afternoon.
+He is right that they would. The thought stuck with me, because I could not immediately work out what I would tell that person if they asked.
 
-It made me wonder what a proper catch-up guide would look like.
+So imagine you muted the word "AI" in early 2023. ChatGPT had become popular, but you assumed it was another tech-industry obsession that would settle down after a few months. You then avoided every model launch, benchmark graph, job-loss prediction, generated image and argument about whether a chatbot was alive.
 
-Imagine that you muted the word "AI" in early 2023. ChatGPT had become popular, but you assumed it was another tech-industry obsession that would settle down after a few months. You then successfully avoided every model launch, benchmark graph, job-loss prediction, generated image and argument about whether a chatbot was alive.
-
-Today you accidentally open the muted-words settings and turn AI back on.
+Today you open your muted-words settings by accident and turn AI back on.
 
 What did you miss?
 
@@ -41,13 +39,9 @@ In 2023, most people understood generative AI as a website where you typed a que
 
 By 2026, the same broad technology can inspect images, listen and speak in real time, read large collections of documents, search the web, operate software, edit files, run terminal commands, write and test code, generate convincing images and video, and work through multi-step tasks with less supervision.
 
-The important change is not that the chatbot became a better conversationalist.
+The important change is not that the chatbot became a better conversationalist. It is that the chat box grew eyes, ears, memory and hands.
 
-**The chat box grew eyes, ears, memory and hands.**
-
-It still makes things up. It still misunderstands instructions. It still needs human judgment, especially when the consequences matter. The difference is that it can now be wrong while doing something rather than merely wrong in a paragraph.
-
-That is most of the last three years in one mildly alarming sentence.
+It still makes things up, still misunderstands instructions, and still needs human judgment when the consequences matter. What changed is that it can now be wrong while doing something, rather than merely wrong in a paragraph. That is most of the last three years in one mildly alarming sentence.
 
 ## What AI looked like when you muted it
 
@@ -59,7 +53,7 @@ The results were startling, then quickly annoying. ChatGPT could explain code, d
 
 That was the tone of 2023: extraordinary benchmark results paired with a model that might invent the source it had just recommended.
 
-The year also established that this would not be one company's product. Anthropic developed Claude. Google renamed and rebuilt its conversational AI efforts around Gemini. Meta released [Llama 2 for research and commercial use](https://about.fb.com/news/2023/07/llama-2/), helping create a large ecosystem of models that people could download, modify and run outside the biggest AI services.
+The year also established that this would not be one company's product. Anthropic released Claude. Google launched Bard, which it would later rename and rebuild around Gemini. Meta released [Llama 2 for research and commercial use](https://about.fb.com/news/2023/07/llama-2/), helping create a large ecosystem of models that people could download, modify and run outside the biggest AI services.
 
 If you muted AI at that point, your mental picture is probably a text generator with an impressive demo and questionable reliability.
 
@@ -83,7 +77,7 @@ The limitations were still obvious. It could misread an image, interrupt at the 
 
 The context window is the amount of information a model can consider during one interaction. Early ChatGPT conversations could lose track of details after a modest amount of text.
 
-In February 2024, [Google previewed Gemini 1.5 Pro with a context window of up to one million tokens](https://blog.google/innovation-and-ai/products/google-gemini-next-generation-model-february-2024/). Google demonstrated it processing long documents, hours of audio, video and large codebases.
+In February 2024, [Google announced Gemini 1.5 Pro](https://blog.google/innovation-and-ai/products/google-gemini-next-generation-model-february-2024/) with a standard context window of 128,000 tokens, and up to one million tokens for a restricted group of developers in private preview. Google demonstrated it processing long documents, hours of audio, video and large codebases. The million-token headline was a preview, not something you could go and use that week, which is worth remembering whenever a context-window record gets announced.
 
 A large context window is not human memory, and stuffing more information into a prompt does not guarantee understanding. It did, however, change the scale of material people could hand to an AI. A contract, book, meeting archive or repository no longer had to be squeezed into a few selected paragraphs before the model could begin.
 
@@ -121,7 +115,7 @@ This was not a completely new idea. Developers had been building tool-using loop
 
 The experience differs from asking an ordinary chatbot what it already knows. A research agent can decide which information it needs, look for it, inspect PDFs and web pages, notice a missing detail and search again.
 
-This is helpful, but the citations still need checking. A report with 40 links can contain a claim that is not supported by the link beside it. Automation made serious research faster without making source criticism optional.
+This is helpful, but the citations still need checking. A report with 40 links can contain a claim that is not supported by the link beside it. When I went looking for [the base plate dimensions of my router]({{< ref "bosch-pof-1200-ae-dimensions-and-specs.md" >}}), I got two confidently cited answers that contradicted each other, and one of them contradicted itself three ways inside a single bullet list. Automation made serious research faster without making source criticism optional.
 
 ### Coding moved from autocomplete to delegation
 
@@ -201,7 +195,7 @@ The [Stanford 2025 AI Index](https://hai.stanford.edu/ai-index/2025-ai-index-rep
 
 This is one reason AI appeared in every product. A feature that was financially ridiculous in 2023 could be cheap enough to give away a year later.
 
-Falling cost also encouraged waste. Companies added AI summaries where a sentence written by a human would have been clearer. Products generated material nobody wanted because generation itself was cheap. "Can we add AI?" was answered much more often than "Should we?"
+Falling cost also encouraged waste. Companies added AI summaries where a sentence written by a human would have been clearer, and products generated material nobody wanted because generation itself was cheap. "Can we add AI?" was answered much more often than "Should we?" I have written about [what it takes to use this stuff without producing sludge]({{< ref "building-a-content-farm-in-2026.md" >}}), and the short version is that the cost of making something has collapsed while the cost of it being worth reading has not moved.
 
 ## Work adopted AI faster than work understood it
 
@@ -217,7 +211,7 @@ The important divide was not simply between companies with AI and companies with
 
 In 2023, arguments about AI regulation often sounded theoretical. By 2026, laws, standards and court cases were affecting product decisions.
 
-The [European Union's AI Act](https://digital-strategy.ec.europa.eu/en/policies/regulatory-framework-ai) entered into force on 1 August 2024. Its provisions arrived in stages, with rules covering prohibited practices, AI literacy, general-purpose models and high-risk systems applying on different dates.
+The [European Union's AI Act](https://digital-strategy.ec.europa.eu/en/policies/regulatory-framework-ai) entered into force on 1 August 2024, and then arrived in stages. The bans on prohibited practices and the AI literacy obligations applied from 2 February 2025. Obligations for general-purpose AI models followed on 2 August 2025. The regulation becomes fully applicable on 2 August 2026, which is about three weeks after I am writing this, while some high-risk categories run on until 2027 and 2028.
 
 Other jurisdictions developed their own mixtures of sector rules, executive action, safety requirements and disclosure laws. Copyright cases continued testing whether training on protected works was lawful and when generated outputs infringed existing material.
 
@@ -297,21 +291,13 @@ Pick one recurring annoyance from your actual life and test whether AI improves 
 
 ## Were the people who kept AI muted left behind?
 
-Not necessarily.
+Less than you might expect. Following every AI release for three years did not make a person wise. It may only have taught them the names of 70 discontinued models and given them strong opinions about benchmark contamination.
 
-Following every AI release for three years did not make a person wise. It may only have taught them the names of 70 discontinued models and given them strong opinions about benchmark contamination.
+What the people who kept watching actually gained was not intelligence. It was the loss of surprise. They used the tools, so they learned which tasks worked, when to distrust an answer, and how quickly yesterday's limitation might disappear. That intuition cannot be reconstructed by scrolling one timeline, and it is the part of the last three years that was genuinely worth accumulating.
 
-One reply to Kent's post made the better point: the people who kept watching did not automatically become smarter, but they stopped being surprised.
+The tools also got much easier to use, which works in your favour. There was no secret three-year training course, and you can open a current assistant today and start with a real problem.
 
-That familiarity matters. People who used the tools learned which tasks worked, when to distrust an answer and how quickly yesterday's limitation might disappear. They developed intuition that cannot be recovered from one timeline.
-
-The good news is that the tools also became easier to use. You did not miss a secret three-year training course. You can open a current assistant today and start with a real problem.
-
-The world on the other side of the mute button is stranger, noisier and more useful than it was in 2023. It is also full of exaggerated claims, avoidable mistakes and products whose only feature is that somebody added a sparkle icon.
-
-You did miss a lot.
-
-You missed enough that catching up should be interesting.
+The world on the other side of the mute button is stranger, noisier and more useful than it was in 2023, and it is also full of exaggerated claims, avoidable mistakes, and products whose only feature is that somebody added a sparkle icon. You missed a great deal. Most of it was noise, and the part that was not is still sitting there, waiting for you to try it.
 
 ## Sources and further reading
 
