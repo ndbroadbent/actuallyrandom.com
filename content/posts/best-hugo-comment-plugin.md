@@ -77,6 +77,34 @@ The hosted free plan includes one site, 100 approved comments per month and 10 q
 
 Cusdis does not include an automatic spam filter. Instead, every new comment remains hidden until it is approved. That would become tedious on a busy publication, but at low volume it is a useful feature. Nothing strange, abusive or promotional appears publicly while I am asleep.
 
+### If you sign up with GitHub, turn notifications on immediately
+
+This one deserves a warning, because it combines badly with the moderation model above.
+
+I created my Cusdis account through GitHub. Cusdis then had no email address for me, for logins or for anything else. The consequence is that no comment notifications were ever sent. Every comment a reader left would sit unapproved and invisible, and I would have no idea any had arrived.
+
+You can see the behaviour in the source. Notifications resolve the destination like this:
+
+```ts
+const notificationEmail =
+  project.owner.notificationEmail || project.owner.email
+
+if (project.owner.enableNewCommentNotification) {
+  // ...
+  try {
+    this.emailService.send(msg)
+  } catch (e) {
+    // TODO:
+  }
+}
+```
+
+If both fields are empty there is no recipient, and the failure is swallowed by an empty `catch`. Nothing is logged, nothing is retried, and nothing tells you.
+
+The fix takes a minute. Go to `User` then `Settings` in the Cusdis dashboard, fill in **Email (for notification)**, and make sure **Enable notification** is switched on. The documentation mentions where to change the notification address, but not that it may be blank to begin with.
+
+Cusdis does request the `read:user,user:email` scope from GitHub, so I assume the address goes missing when your GitHub email is set to private, as mine is. Either way, check it. A moderated comment system that cannot tell you a comment is waiting is just a system that quietly deletes your comments.
+
 There are a couple of reasons to remain cautious. The project's GitHub README carries the line "Contact me if you want to buy/acquire this project", and the newest tagged release there is v1.3.0 from November 2021. The repository has not been abandoned, with commits as recently as late 2025, but nearly five years without a release is a signal. A 2023 Hugo forum discussion also raised concerns about exporting comments. The hosted service is still operating and advertises version 1.4.0, so the cloud product has clearly moved on from the last tag. I would confirm the export process before building a valuable archive there.
 
 For Actually Random, that risk feels proportionate. The blog is new, the expected comment volume is tiny, and changing providers later would be manageable. Cusdis gets comments online now without adding another bill or another server.
