@@ -10,3 +10,57 @@
   data-theme="auto">
 </div>
 <script async defer src="https://cusdis.com/js/cusdis.es.js"></script>
+
+{{- /* Cusdis creates a srcdoc iframe and only gives it a height when its inner
+       app posts a `resize` message. That message does not arrive here, so the
+       iframe keeps the browser default of 150px and the thread scrolls inside a
+       tiny box. A srcdoc iframe inherits our origin, so we can measure the inner
+       document ourselves and size the frame to fit. */ -}}
+<style>
+  #cusdis_thread { margin-top: var(--gap, 24px); }
+  #cusdis_thread iframe { width: 100%; border: 0; min-height: 240px; display: block; }
+</style>
+<script>
+  (function () {
+    var mount = document.getElementById("cusdis_thread");
+    if (!mount) return;
+
+    var wired = null;
+
+    function fit(frame) {
+      var doc = frame.contentDocument;
+      if (!doc || !doc.documentElement) return;
+      var h = Math.max(
+        doc.documentElement.scrollHeight,
+        doc.body ? doc.body.scrollHeight : 0
+      );
+      if (h > 0 && frame.style.height !== h + "px") frame.style.height = h + "px";
+    }
+
+    function wire(frame) {
+      if (wired === frame) return;
+      wired = frame;
+      var run = function () { fit(frame); };
+      frame.addEventListener("load", run);
+      run();
+      var doc = frame.contentDocument;
+      if (doc && doc.body) {
+        new MutationObserver(run).observe(doc.body, { childList: true, subtree: true, characterData: true });
+        if (window.ResizeObserver) new ResizeObserver(run).observe(doc.documentElement);
+      }
+    }
+
+    function tick() {
+      var frame = mount.querySelector("iframe");
+      if (frame) { wire(frame); fit(frame); }
+    }
+
+    new MutationObserver(tick).observe(mount, { childList: true, subtree: true });
+    window.addEventListener("message", function () { setTimeout(tick, 50); });
+    window.addEventListener("resize", tick);
+
+    var poll = setInterval(tick, 400);
+    setTimeout(function () { clearInterval(poll); tick(); }, 20000);
+    tick();
+  })();
+</script>
