@@ -132,7 +132,13 @@ The best subjects so far have come from ordinary life: a strange fact from TikTo
 
 I can still check Google Trends, Search Console and keyword tools later. They help me phrase the question and understand what information people need. They should not be the only source of the idea.
 
-I tried it the other way round once, [mining three years of my own ChatGPT history for keywords with real search demand]({{< ref "mining-2286-chatgpt-conversations-for-blog-posts-people-actually-search-for.md" >}}). It worked, in that it surfaced a thousand queries people genuinely type. It also showed me that the questions I find interesting and the questions people search for are almost disjoint sets. Keyword research is a good editor and a terrible muse.
+I tried it the other way round once, [mining three years of my own ChatGPT history for keywords with real search demand]({{< ref "mining-2286-chatgpt-conversations-for-blog-posts-people-actually-search-for.md" >}}). It half worked, and the half that failed is more interesting.
+
+The idea was that Google's autocomplete is a free demand oracle. Feed it a phrase, and if it completes that phrase, people are typing it. If it returns nothing, essentially nobody is. That premise held up: two thirds of everything I sent to the endpoint came back empty. What I missed is that my own script refused to accept the empty answer. When a conversation title returned nothing, it quietly chopped the title down to three words and asked again, then filed the result as though the original question had demand. "Scout card game tokens" became "card game tokens". "4% rule flexibility" became "rule flexibility". Of the 1,039 hits I was pleased with at the time, only 448 came from the question I actually asked. The rest were answers to a question the script invented after the real one failed.
+
+The corrected picture is duller and more useful. Roughly one conversation in five has a title that Google recognises as a real search. Whether I cared about the subject makes no difference to that rate. Conversations where I argued with the model for forty turns score the same as the ones I abandoned after two. What does predict it is the number of words in the title, which is a fact about ChatGPT's automatic titler rather than anything about me or about search.
+
+So keyword research is a good editor and a terrible muse. It can tell me which of my questions other people also ask. It cannot tell me which ones are worth answering, and it will cheerfully lie about the first thing if I let it.
 
 ### 2. Add something that was not in the search results
 
