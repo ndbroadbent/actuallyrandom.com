@@ -62,6 +62,24 @@ Between about nine and eighteen rodents a day, depending on who the fox is, what
 
 Fifteen successful hunts. Every day. That is the quota, and everything else follows from it.
 
+## Which is why foxes point north
+
+There is a famous and slightly ridiculous finding about foxes that I had always filed under "charming trivia." Running the energy budget moved it into a different category entirely.
+
+Červený and colleagues watched 84 wild red foxes in the Czech Republic between April 2008 and September 2010 and recorded 592 mousing jumps, the high arcing pounce a fox makes onto prey it cannot see, buried under snow or grass.
+
+The jumps were not aimed randomly. Foxes strongly preferred to leap towards magnetic north-northeast, and the pounces that went that way worked. Attacks in the 340 to 40 degree segment were "highly successful (72.5%)." Attacks in the opposite segment, 160 to 220 degrees, succeeded 60 percent of the time. Attacks in any other direction had "a success rate under 18 per cent."
+
+Nobody knows for certain how the fox does this. The leading suggestion is that it uses the angle of the Earth's magnetic field, which dips steeply downward in the northern hemisphere, as a kind of rangefinder to judge distance to a sound it cannot see.
+
+Now put the two papers together, which as far as I can tell nobody has bothered to do.
+
+Our autumn male needs 14.7 voles. If every pounce is aligned north-northeast and lands 72.5 percent of the time, he needs about 20 jumps a day to eat.
+
+If he pounces in some other direction, at under 18 percent, he needs 81.
+
+Alignment is not a quirk. It is the difference between twenty pounces a day and eighty, and a fox does not have eighty pounces a day in it. Whatever that magnetic sense is, it is worth roughly sixty leaps of effort daily, which is to say it is worth being alive.
+
 ## And that is why the diet is a list
 
 Fifteen rodents a day is a punishing target, and voles do not cooperate. They have population cycles. They vanish under ice. Sometimes there simply are not fifteen.
