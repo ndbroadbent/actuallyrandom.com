@@ -31,7 +31,7 @@ After going through the current options, my answer is:
 
 **Cusdis is the best free starting point for a small general blog. Giscus is the best free option for a technical audience. FastComments is the stronger managed product if you are willing to pay, and Remark42 is the best option if you want to host everything yourself.**
 
-I chose Cusdis for Actually Random. This site may attract programmers, but someone arriving from Google to read about bats or Adrien Brody should not need a GitHub account to leave a comment. Cusdis is completely free for the first 100 approved comments each month, and I am definitely not expecting that many comments here.
+I chose Cusdis for Actually Random. Someone arriving from Google to read about bats or Adrien Brody should not need a GitHub account to leave a comment. Cusdis is completely free for the first 100 approved comments each month, and I am definitely not expecting that many comments here.
 
 ## Why there is no actual Hugo comment plugin
 
@@ -203,6 +203,102 @@ comments: false
 The widget renders near the bottom of each article and does not appear on the home page, the archive or any other list page, because `single.html` is the only template that calls the partial. The Cusdis script is loaded with `async defer`, so the article does not wait for the comment service before rendering.
 
 This site is running exactly that, as of this post. If you can see a comment box below, it worked.
+
+## The widget arrives broken, and you have to fix it yourself
+
+When I first deployed the embed above, the comment form appeared inside a squashed white box about 150 pixels tall. You could scroll the form up and down inside it, like reading a novel through a letterbox.
+
+![The Cusdis comment form clipped to a 150 pixel tall white box on a dark page, showing only the Nickname and Email fields with Reply cut off at the bottom](/images/cusdis-iframe-150px.jpg)
+
+Two things are wrong in that screenshot. The box is too short, and it is white on a dark site despite `data-theme="auto"`. They turn out to be the same bug.
+
+Cusdis renders the thread inside a `srcdoc` iframe. Its loader sets exactly two styles on that iframe:
+
+```js
+singleTonIframe.style.width = "100%";
+singleTonIframe.style.border = "0";
+```
+
+It never sets a height. There is only one place a height is ever assigned, and it happens in response to a message from inside the iframe:
+
+```js
+case "resize": { iframe.style.height = msg.data + "px"; }
+```
+
+So 150 pixels is not a `max-height` set by Cusdis or by PaperMod. I went looking for it in both and it is in neither. It is the default height the HTML specification gives an `<iframe>`, which is 300 by 150. The iframe is simply never resized, so the default stands.
+
+The theme is broken for the same reason. `auto` is resolved by the loader only when the iframe reports that it has loaded:
+
+```js
+case "onload": {
+  if (target.dataset.theme === "auto") {
+    postMessage("setTheme", darkModeQuery.matches ? "dark" : "light");
+  }
+}
+```
+
+Both symptoms trace to one thing: messages sent from the iframe to the parent page are not arriving. Inside the frame, the code does `window.parent.postMessage(JSON.stringify(...))`, with no `targetOrigin` argument, once on load and again from a `MutationObserver` whenever the thread changes. I confirmed the effect rather than the cause. Rendering the deployed page in headless Chrome and reading the iframe's inline style after everything had settled gave me this:
+
+```
+width: 100%; border: 0px;
+```
+
+No height, ever.
+
+The fix is easier than the diagnosis. A `srcdoc` iframe inherits the origin of the page that created it, so the parent can reach into `contentDocument` and measure the real content. Messages going the other way, from parent into the frame, work fine, which means `CUSDIS.setTheme` can be called directly instead of waiting for a handshake that never completes.
+
+```js
+(function () {
+  var mount = document.getElementById("cusdis_thread");
+  if (!mount) return;
+
+  function fit(frame) {
+    var doc = frame.contentDocument;
+    if (!doc || !doc.documentElement) return;
+    var h = Math.max(
+      doc.documentElement.scrollHeight,
+      doc.body ? doc.body.scrollHeight : 0
+    );
+    if (h > 0 && frame.style.height !== h + "px") frame.style.height = h + "px";
+  }
+
+  function isDark() {
+    var t = document.documentElement.dataset.theme;
+    if (t) return t === "dark";
+    return window.matchMedia("(prefers-color-scheme: dark)").matches;
+  }
+
+  function syncTheme() {
+    if (window.CUSDIS && window.CUSDIS.setTheme) {
+      try { window.CUSDIS.setTheme(isDark() ? "dark" : "light"); } catch (e) {}
+    }
+  }
+
+  function tick() {
+    var frame = mount.querySelector("iframe");
+    if (frame) { fit(frame); syncTheme(); }
+  }
+
+  new MutationObserver(tick).observe(mount, { childList: true, subtree: true });
+  new MutationObserver(syncTheme).observe(document.documentElement, {
+    attributes: true, attributeFilter: ["data-theme"]
+  });
+  window.matchMedia("(prefers-color-scheme: dark)").addEventListener("change", syncTheme);
+  window.addEventListener("resize", tick);
+
+  var poll = setInterval(tick, 400);
+  setTimeout(function () { clearInterval(poll); tick(); }, 20000);
+  tick();
+})();
+```
+
+The full version in this site's `comments.html` also attaches a `MutationObserver` and a `ResizeObserver` to the iframe's inner document, so the frame grows as comments load rather than only when the poll fires. The bounded interval is a safety net for the first paint, and it stops after twenty seconds. A `min-height` in CSS keeps the frame from collapsing before the first measurement.
+
+Reading `dataset.theme` rather than only the media query matters on PaperMod, because its light and dark toggle writes `data-theme` onto the `html` element and stores the preference in `localStorage`. Watching that attribute means the comment box follows the toggle instead of ignoring it.
+
+After deploying, the same headless check reports `height: 380px`, and the iframe's inner document carries an explicit `color-scheme: dark`. The letterbox is gone.
+
+I do not love that a comment widget needs 40 lines of my own JavaScript to display at the correct size. It is a fair illustration of the earlier caution about Cusdis: the hosted service works, but the code around it has not had a release since 2021.
 
 ## My answer
 

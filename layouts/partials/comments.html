@@ -50,12 +50,32 @@
       }
     }
 
+    /* `data-theme="auto"` is resolved by Cusdis only after the iframe's onload
+       message reaches the parent, which is the same message that never arrives.
+       Parent to iframe messaging does work, so push the theme ourselves. It
+       follows PaperMod's toggle (html[data-theme]) and falls back to the OS. */
+    function isDark() {
+      var t = document.documentElement.dataset.theme;
+      if (t) return t === "dark";
+      return window.matchMedia("(prefers-color-scheme: dark)").matches;
+    }
+
+    function syncTheme() {
+      if (window.CUSDIS && window.CUSDIS.setTheme) {
+        try { window.CUSDIS.setTheme(isDark() ? "dark" : "light"); } catch (e) {}
+      }
+    }
+
     function tick() {
       var frame = mount.querySelector("iframe");
-      if (frame) { wire(frame); fit(frame); }
+      if (frame) { wire(frame); fit(frame); syncTheme(); }
     }
 
     new MutationObserver(tick).observe(mount, { childList: true, subtree: true });
+    new MutationObserver(syncTheme).observe(document.documentElement, {
+      attributes: true, attributeFilter: ["data-theme"]
+    });
+    window.matchMedia("(prefers-color-scheme: dark)").addEventListener("change", syncTheme);
     window.addEventListener("message", function () { setTimeout(tick, 50); });
     window.addEventListener("resize", tick);
 
