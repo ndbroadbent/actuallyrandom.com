@@ -22,7 +22,7 @@ The question I typed was "is the caspian sea salty?", which I assumed had a one 
 
 It has a one sentence answer. The Caspian Sea has a salinity of about **1.2%, or 12 grams per litre, which is roughly a third of the salinity of average seawater**. So yes, it is salty. It is brackish rather than briny. You would not want to drink it, and you would not mistake it for the Pacific either.
 
-The good part is the two questions underneath. Why is it salty at all, and why is it not saltier?
+But why is it salty at all, and why is it not saltier?
 
 ## Why it is salty at all
 

@@ -41,8 +41,6 @@ The second is what your own cells are. Around **84% of human cells are red blood
 
 ## Where 10:1 came from
 
-This is the part that got me.
-
 The 10:1 ratio does not trace back to a study. It traces back to a single sentence in a 1972 paper by Thomas Luckey, in which he did a back-of-the-envelope calculation: assume 10¹¹ bacteria per gram of gut contents, multiply by roughly one litre of alimentary tract capacity, and you get 10¹⁴ bacteria. Divide by the then-assumed 10¹³ human cells and you have ten to one.
 
 It was never presented as a measurement. It was an estimate, of the kind a scientist scribbles to check whether an idea is plausible.

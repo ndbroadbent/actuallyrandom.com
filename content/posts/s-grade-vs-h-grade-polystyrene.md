@@ -19,7 +19,7 @@ keywords:
   - AS 1366.3 polystyrene grades
 ---
 
-I was buying a sheet of polystyrene to sit between a pool table and a plywood workbench top, which is a sentence that requires no further explanation if you have ever owned both a pool table and an idea. The listing said "EXPOL 2400 x 1200 x 40mm S Grade Polystyrene ThermaSlab", and I wondered what the S meant, and whether I should have bought the H instead.
+I was buying a sheet of polystyrene to sit between a pool table and a plywood workbench top. The listing said "EXPOL 2400 x 1200 x 40mm S Grade Polystyrene ThermaSlab", and I wondered what the S meant, and whether I should have bought the H instead.
 
 The short answer, if that is all you came for:
 
@@ -33,7 +33,7 @@ The short answer, if that is all you came for:
 
 H grade is denser, stronger, slightly more insulating and more expensive. S grade is the standard board and it is what most people want.
 
-That is the answer. The interesting part is where those numbers come from, because two respectable sources disagree about them, and the disagreement is the whole story.
+That is the answer. The interesting part is where those numbers come from, because two respectable sources disagree about them.
 
 ## What the grades actually are
 
